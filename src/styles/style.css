@@ -1,0 +1,44 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.info {
+  padding-left: 15px;
+}
+
+.title {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.trailers {
+  margin: 15px;
+}
+
+.movie,
+.trailer {
+  padding: 15px;
+}
+
+.cast,
+.movieInfo,
+.starInfo {
+  padding-left: 0;
+}
+
+.thumbnail .caption {
+  padding: 9px 0;
+}
+
+.caption {
+  min-height: 40px;
+}
+
+.brand {
+  font-weight: bold;
+  text-transform: caplitalize;
+  padding-left: 10px;
+  font-size: 1.2em;
+}
