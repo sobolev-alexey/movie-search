@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import { get } from 'lodash'
 import { StarDetail } from '../components'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { fetchStarDetail, fetchMovieList } from '../actions'
 
 class StarDetailContainer extends Component {
   componentDidMount() {
-    const { dispatch, params: { id } } = this.props
-    dispatch(fetchStarDetail(id))
-    dispatch(fetchMovieList(id))
+    const { fetchStarDetail, fetchMovieList, params: { id } } = this.props
+    fetchStarDetail(id)
+    fetchMovieList(id)
   }
 
   render() {
@@ -21,7 +22,17 @@ class StarDetailContainer extends Component {
   }
 }
 
-export default connect(state => ({
-  star: get(state, 'starDetail.item'),
-  movies: get(state, 'movieList.items'),
-}))(StarDetailContainer)
+export default connect(
+  state => ({
+    star: get(state, 'starDetail.item'),
+    movies: get(state, 'movieList.items'),
+  }),
+  dispatch =>
+    bindActionCreators(
+      {
+        fetchStarDetail,
+        fetchMovieList,
+      },
+      dispatch
+    )
+)(StarDetailContainer)

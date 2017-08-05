@@ -1,7 +1,7 @@
 # Movie Web App
 
 This is a Movie App built in ReactJS.
-It uses open [The Movie Database (TMDb) API] (https://www.themoviedb.org/documentation/api) to display data.
+It uses open The Movie Database (TMDb) API (https://www.themoviedb.org/documentation/api) to display data.
 
 ## Features
 
@@ -12,8 +12,8 @@ It uses open [The Movie Database (TMDb) API] (https://www.themoviedb.org/documen
 
 ## Technical Notes
 
-* Responsive design using [React-Bootstrap]
-* State management using [React-Redux]
+* Responsive design using `React-Bootstrap`
+* State management using `React-Redux`
 
 
 ### Usage
@@ -21,4 +21,4 @@ It uses open [The Movie Database (TMDb) API] (https://www.themoviedb.org/documen
 npm install
 npm start
 ```
-Open http://localhost:3000. 
+Open http://localhost:3000.

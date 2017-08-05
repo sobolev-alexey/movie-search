@@ -11,11 +11,12 @@ const Navigation = ({
   getSuggestionValue,
   renderSuggestion,
   inputProps,
+  onReset,
 }) =>
   <Navbar bsStyle="inverse">
     <Navbar.Header>
       <Navbar.Brand>
-        <a href="#">
+        <a href="#" onClick={onReset}>
           <span className="brand">
             {brand}
           </span>

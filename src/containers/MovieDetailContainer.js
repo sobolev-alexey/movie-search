@@ -1,23 +1,29 @@
 import React, { Component } from 'react'
 import { MovieDetail, DisplayMsg } from '../components'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { fetchMovieDetail, fetchCastList, fetchTrailerList } from '../actions'
 
 class MovieDetailContainer extends Component {
   componentDidMount() {
-    const { dispatch, params: { id } } = this.props
-    dispatch(fetchMovieDetail(id))
-    dispatch(fetchCastList(id))
-    dispatch(fetchTrailerList(id))
+    const {
+      fetchMovieDetail,
+      fetchCastList,
+      fetchTrailerList,
+      params: { id },
+    } = this.props
+    fetchMovieDetail(id)
+    fetchCastList(id)
+    fetchTrailerList(id)
   }
 
   componentWillReceiveProps(nextProps) {
     const { params: { id } } = nextProps
+    const { fetchMovieDetail, fetchCastList, fetchTrailerList } = this.props
     if (id && this.props.params.id !== id) {
-      const { dispatch } = this.props
-      dispatch(fetchMovieDetail(id))
-      dispatch(fetchCastList(id))
-      dispatch(fetchTrailerList(id))
+      fetchMovieDetail(id)
+      fetchCastList(id)
+      fetchTrailerList(id)
     }
   }
 
@@ -41,7 +47,7 @@ class MovieDetailContainer extends Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
   const { movieDetail, castList, trailerList } = state
   const { isFetcing_movie, item: movie, error_movie } = movieDetail
   const { isFetcing_casts, items: casts, error_casts } = castList
@@ -60,4 +66,16 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(MovieDetailContainer)
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      fetchMovieDetail,
+      fetchCastList,
+      fetchTrailerList,
+    },
+    dispatch
+  )
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  MovieDetailContainer
+)

@@ -30,10 +30,15 @@ body {
 
 .thumbnail .caption {
   padding: 9px 0;
+  height: 60px;
 }
 
 .caption {
   min-height: 40px;
+}
+
+.poster {
+  max-height: 400px;
 }
 
 .brand {

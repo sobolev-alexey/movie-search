@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { Suggestion, Navigation } from '../components'
+import { bindActionCreators } from 'redux'
+import { fetchMovieList } from '../actions'
 import { URL_SEARCH, API_KEY } from '../constants/const'
 
 class SearchBarContainer extends Component {
@@ -26,7 +28,7 @@ class SearchBarContainer extends Component {
   }
 
   handleSubmit = searchText => {
-    this.props.dispatch(push(`/search/${searchText}`))
+    this.props.push(`/search/${searchText}`)
     this.setState({ value: '' })
   }
 
@@ -65,6 +67,8 @@ class SearchBarContainer extends Component {
     })
   }
 
+  onReset = () => this.props.fetchMovieList()
+
   getSuggestionValue = suggestion => suggestion.title
 
   renderSuggestion = suggestion => <Suggestion suggestion={suggestion} />
@@ -73,7 +77,7 @@ class SearchBarContainer extends Component {
     if (method === 'enter') {
       event.preventDefault()
     }
-    this.props.dispatch(push(`/movie/${suggestion.id}`))
+    this.props.push(`/movie/${suggestion.id}`)
     this.setState({
       value: '',
     })
@@ -98,9 +102,18 @@ class SearchBarContainer extends Component {
         getSuggestionValue={this.getSuggestionValue}
         renderSuggestion={this.renderSuggestion}
         inputProps={inputProps}
+        onReset={this.onReset}
       />
     )
   }
 }
 
-export default connect()(SearchBarContainer)
+export default connect(null, dispatch =>
+  bindActionCreators(
+    {
+      fetchMovieList,
+      push,
+    },
+    dispatch
+  )
+)(SearchBarContainer)
